@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Posts</title>
+{% endblock %}
+
+{% block content %}
+<div style ="padding: 20px; background-color: #735DA5; border-radius: 5px; display: flex; justify-content: center; align-items: center; text-align: center;">
+   <a href="create/" style="margin: 15px auto; padding: 5px 10px; background-color: #D3C5E5; color: #222; border-radius: 5px; box-shadow: 1px 1px 5px white; text-decoration: none;">Create Post</a>
+</div>
+
+<div class="reviews-grid">
+
+{% for post in posts %}
+  
+<div class="review-card">
+                    <img src="{{ post.img.url }}" alt="IMAGE" class="review-image">
+                    <div class="review-content">
+                        <h3 class="review-title">{{ post.title }}</h3>
+                        <p class="review-description">{{ post.description }}</p>
+                        <a href="#" class="review-read-more" style="font-size: 12px;">Uploaded by: {{ post.user.username }}<br />At {{ post.created_at }}</a>
+                    </div>
+{% if post.user == user %}
+<a href="{% url 'edit' post.id %}" style="margin: 15px auto; padding: 5px 10px; background-color: #222; color: #fff; border-radius: 5px; box-shadow: 1px 1px 5px white;">Edit</a>
+<a href="{% url 'delete' post.id %}" style="margin: 15px auto; padding: 5px 10px; background-color: #222; color: #fff; border-radius: 5px; box-shadow: 1px 1px 5px white;">Delete</a>
+{% endif %}
+</div>
+    
+{% endfor %}
+    
+</div>
+
+{% endblock %}

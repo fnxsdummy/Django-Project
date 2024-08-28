@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>
+{% if form.instance.pk %}
+  Edit Post
+{% else %}
+  Create Post
+{% endif %}
+</title>
+{% endblock %}
+
+{% block content %}
+<div style="padding: 20px; background-color: #735DA5; border-radius: 5px; display: flex; justify-content: center; align-items: center; text-align: center;">
+<form method='POST' style="padding: 20px 10px; background-color: #fff; border-radius: 5px; display: flex; flex-direction: column; align-items: start; justify-content: start; gap: 15px;" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  {{ form.as_p }}
+  
+  <button type="submit" style="background-color: #735DA5; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+    {% if form.instance.pk %}
+      Update Post
+    {% else %}
+      Create Post
+    {% endif %}
+  </button>
+  <a href="{% url 'posts' %}" style="color: #fff; font-weight: bold; text-decoration: none; margin: 5px 10px; background-color: #735DA5; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Cancel</a>
+   
+</form>
+</div>
+{% endblock %}

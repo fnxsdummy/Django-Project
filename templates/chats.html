@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Chats</title>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+  <!-- Outer Box -->
+    <div style="width: 90%; max-width: 600px; height: 90vh; max-height: 700px; background-color: #777; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; justify-content: space-between; margin: 10px auto;">
+
+        <!-- Chat Box -->
+        <div style="padding: 20px 10px; overflow-y: auto; flex-grow: 1; border-bottom: 1px solid #ddd; margin-top: 10px;">
+
+          
+            <div id="chat-box" style="margin-bottom: 30px; padding: 5px 10px; background-color: #3FA1C8; border-radius: 5px; overflow-y: auto; text-align: center;">Welcome to discussion section.<br />↯</div>
+          {% for message in messages %}
+            <div style="
+              margin-bottom: 5px;
+              padding: 5px;
+              background-color: transparent;
+              border-radius: 5px;
+              align-self: flex-end;
+              {% if message.user == user %}
+              justify-content: end;
+              {% else %}
+              justify-content: start;
+              {% endif %}
+              align-items: start;
+              display: flex;
+              ">
+              <p style="
+                text-align: left;
+                max-width: 60%;
+                margin: 0;
+                font-size: 12px;
+                color: #333;
+                padding: 3px 10px;
+                border-radius: 2px;
+                {% if message.user == user %}
+                background-color: #B4A2F6;
+                color: #fff;
+                {% else %}
+                background-color: #D6E6F2;
+                color: #222;
+                {% endif %}
+                ">
+                {% if message.user == user %}
+                {{ message.message }}
+                {% else %}
+                [ {{ message.user.username }} ]:<br />{{ message.message }}
+                {% endif %}
+              </p>
+            </div>
+          {% endfor %}
+          
+            <!-- More chat messages will appear here -->
+        </div>
+
+        <!-- Input and Submit Button -->
+        <div style="padding: 10px; display: flex; align-items: center; justify-content: center; background-color: #A5AAB3;">
+            <form method="POST" style="display: flex; align-items: end; justify-content: center; flex-grow: 1; flex-direction: row;">
+                {% csrf_token %}
+              {{ form.as_p }}
+            <button id="submit-btn" style="width: 30%; margin: 0 auto; padding: 2px 8px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; font-size: 1rem; cursor: pointer; transition: background-color 0.3s ease;">Send ➔</button>
+            </form>
+        </div>
+    </div>
+
+{% else %}
+<div style="padding: 20px; background-color: #735DA5; border: 1px solid #ddd; border-radius: 5px; text-align: center;">
+    <h4 style="color: #fff; margin-bottom: 30px;">You are not a registered member so you cannot access the chat. Register or login first.</h4>
+    <h4 style="color: #fff; margin-bottom: 30px;">Please <a href="#" style="color: #fff; font-weight: bold; text-decoration: none;">login</a> or <a href="#" style="color: #fff; font-weight: bold; text-decoration: none;">sign up</a> to start chatting.</h4>
+</div>
+
+<script>
+   const chatBox = document.getElementById('chat-box');
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+</script>
+
+
+{% endif %}
+
+{% endblock %}

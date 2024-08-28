@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+
+{% block content %}
+<div style="background-color: #735DA5; padding: 40px 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 400px; width: 100%; margin: 10px auto;">
+        <h2 style="color: #fff; text-align: center; margin-bottom: 30px; font-size: 24px;">Login</h2>
+        <form method="POST" style="display: flex; flex-direction: column; gap: 15px; justify-content: start; align-items: start; text-align: left;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div style="text-align: right;">
+                <a href="#" style="color: #fff; font-size: 14px; text-decoration: none; margin-bottom: 10px; display: inline-block;">Forgot Password?</a>
+             </div>
+            <button type="submit"
+                style="width: 100%; background-color: #fff; color: #735DA5; border: none; padding: 12px 0; font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                Login
+            </button>
+        </form>
+        <div style="text-align: center; margin-top: 20px;">
+            <p style="color: #fff; font-size: 14px;">Don't have an account?<a href="{% url 'register' %}" style="color: #fff; font-weight: bold; text-decoration: none;">Register</a></p>
+        </div>
+    </div>             
+                
+{% endblock %}

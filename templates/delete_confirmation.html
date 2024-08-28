@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Delete Post</title>
+{% endblock %}
+
+{% block content %}
+<div style="padding: 20px; background-color: #fff; border-radius: 5px; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <h3>Are you sure you want to delete this post?</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #735DA5; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Delete Post</button>
+        <a href="{% url 'home' %}" style="margin: 15px auto; padding: 5px 10px; background-color: #222; color: #fff; border-radius: 5px; box-shadow: 1px 1px 5px white;">Cancel</a>
+    </form>
+</div>
+{% endblock %}

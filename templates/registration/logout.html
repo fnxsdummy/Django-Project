@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Logout</title>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div style="padding: 20px; background-color: #735DA5; border-radius: 5px; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <h3>Are you sure you want to logout?</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #735DA5; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Logout</button>
+    </form>
+</div>
+{% else %}
+<div style="padding: 20px; background-color: #735DA5; border-radius: 5px; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <h3>You are not logged in.</h3>
+    <a href="{% url 'login' %}" style="margin: 15px auto; padding: 5px 10px; background-color: #222; color: #fff; border-radius: 5px; box-shadow: 1px 1px 5px white;">Login</a>
+  <a href="{% url 'signup' %}" style="margin: 15px auto; padding: 5px 10px; background-color: #222; color: #fff; border-radius: 5px; box-shadow: 1px 1px 5px white;">Signup</a>
+</div>
+{% endif %}
+{% endblock %}
+    
